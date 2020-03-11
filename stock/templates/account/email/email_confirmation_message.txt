@@ -1,0 +1,9 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %} {{ site_name }} 입니다.
+
+ {{ user_display }} 이메일로 깃발ERP 시스템에 회원 가입 하셨습니다.
+ 이메일 주소가 맞으면  {{ activate_url }} 을 클릭하여 주시기 바랍니다.
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %} 감사합니다!
+{{ site_domain }}{% endblocktrans %}
