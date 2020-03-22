@@ -15,6 +15,36 @@ class StockList(models.Model):
         managed = False
         db_table = 'stock_list'
 
+
+#   * Make sure each model has one field with primary_key=True
+
+class StockPrice(models.Model):
+    company_id = models.CharField(max_length=30, blank=True, null=True)
+    txn_date = models.DateField()
+    price_open = models.FloatField(blank=True, null=True)
+    price_high = models.FloatField(blank=True, null=True)
+    price_low = models.FloatField(blank=True, null=True)
+    price_close = models.FloatField(blank=True, null=True)
+    volume = models.FloatField(blank=True, null=True)
+    volume_foreign = models.FloatField(blank=True, null=True)
+    volume_org = models.FloatField(blank=True, null=True)
+    per = models.FloatField(blank=True, null=True)
+    eps = models.FloatField(blank=True, null=True)
+    pbr = models.FloatField(blank=True, null=True)
+    risefall = models.FloatField(blank=True, null=True)
+    risefall_rate = models.FloatField(blank=True, null=True)
+    fcst = models.IntegerField(blank=True, null=True)
+    #residual = models.IntegerField(blank=True, null=True)
+    upd_d = models.DateTimeField(blank=True, null=True)
+    price_avg = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_price'
+
+    def __str__(self):  # dunder method(double underscore)
+        return "종목코드: " + self.company_id
+
 class Book(models.Model):
    # id = models.UUIDField(
     #    primary_key=True,
@@ -293,3 +323,70 @@ class StockIndicator(models.Model):
     class Meta:
         managed = False
         db_table = 'stock_indicator'
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+
+
+
+class StockTxn(models.Model):
+    txn_seq = models.PositiveIntegerField()
+    user_id = models.PositiveIntegerField(blank=True, null=True)
+    bos = models.CharField(max_length=1, blank=True, null=True)
+    txn_date = models.DateField(blank=True, null=True)
+    txn_time = models.DateTimeField(blank=True, null=True)
+    company_id = models.CharField(max_length=10)
+    txn_yn = models.CharField(max_length=1, blank=True, null=True)
+    reset_yn = models.CharField(max_length=1, blank=True, null=True)
+    close_yn = models.CharField(max_length=1, blank=True, null=True)
+    txn_qty = models.IntegerField(blank=True, null=True)
+    txn_price = models.IntegerField(blank=True, null=True)
+    txn_fee = models.IntegerField(blank=True, null=True)
+    cash_inout = models.IntegerField(blank=True, null=True)
+    cash_balance = models.IntegerField(blank=True, null=True)
+    asis_price = models.IntegerField(blank=True, null=True)
+    target_period = models.IntegerField(blank=True, null=True)
+    target_price = models.IntegerField(blank=True, null=True)
+    target_date = models.DateField(blank=True, null=True)
+    bos_reason = models.CharField(max_length=100, blank=True, null=True)
+    bos_reason_detail = models.CharField(max_length=250, blank=True, null=True)
+    result_review = models.CharField(max_length=250, blank=True, null=True)
+    upd_d = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_txn'
+
+class StockChangeHis(models.Model):
+    txn_date = models.DateField(blank=True, null=True)
+    title = models.CharField(max_length=50, blank=True, null=True)
+    rmk = models.CharField(max_length=200, blank=True, null=True)
+    upd_d = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_change_his'
+
+
+class StockCompany(models.Model):
+    company_id = models.CharField(max_length=10)
+    company_name = models.CharField(max_length=30)
+    pod = models.CharField(max_length=1)
+    baedang = models.CharField(max_length=1, blank=True, null=True)
+    dom_yn = models.CharField(max_length=1, blank=True, null=True)
+    cre_d = models.DateTimeField(blank=True, null=True)
+    corr_oil = models.FloatField(blank=True, null=True)
+    corr_exchange = models.FloatField(blank=True, null=True)
+    corr_interest = models.FloatField(blank=True, null=True)
+    is_active = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_company'
+
+    def get_absolute_url(self):
+        return reverse('stockCompany', args=[str(self.id)]) # 뷰에서 success_url = reverse_lazy('stockCompany') 하는 것과 동일

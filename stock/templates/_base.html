@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <SCRIPT src="{% static 'js/jquery-3.3.1.min.js' %}" ></SCRIPT>
 </head>
 <body>
   <header>
@@ -33,8 +34,18 @@
     <!--allauth 사용 -->
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4\
      mb-3 bg-white border-bottom shadow-sm">
-      <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">Stock</a>
+      <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">홈</a>
       <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="{% url 'indicator' %}">Tech Indicator</a>
+        <a class="p-2 text-dark" href="{% url 'stockprice' %}">Price</a>
+        <a class="p-2 text-dark" href="{% url 'stocklist' %}">Company List</a>
+        <a class="p-2 text-dark" href="{% url 'stocktxn' %}">Transaction</a>
+        <a class="p-2 text-dark" href="{% url 'book_list' %}">Chart</a>
+        <a class="p-2 text-dark" href="{% url 'book_list' %}">Market</a>
+        <a class="p-2 text-dark" href="{% url 'book_list' %}">Backtest</a>
+        <a class="p-2 text-dark" href="{% url 'stockChangeHistory' %}">지표산식 변경이력</a>
+        <a class="p-2 text-dark" href="{% url 'stockCompany' %}">StockCompany</a>
+        <a class="p-2 text-dark" href="{% url 'book_list' %}">Manager</a>
         <a class="p-2 text-dark" href="{% url 'book_list' %}">Books</a>
         <a class="p-2 text-dark" href="{% url 'about' %}">소개</a>
         {% if user.is_authenticated %}
@@ -47,7 +58,11 @@
       </nav>
     </div>
 
+    {% block script %}
+    {% endblock script %}
+
   </header>
+
   <div class="container">
     {% block content %}
     {% endblock content %}

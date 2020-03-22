@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 
 
 
@@ -9,14 +9,14 @@
 {% block content %}
 
 <div class="row block-center board">
-<A href="{% url 'home' %}"> HOME </A>
+
 	<div class="col-11">
 
 		<div class="row">
 			<div class="list-title col-1"><p> 순 </p></div>
-			<div class="list-title col-5"><p>종목코드</p></div>
+			<div class="list-title col-1"><p>종목코드</p></div>
 			<div class="list-title col-2"><p>종목명</p></div>
-			<div class="list-title col-1"><p>특이사항</p></div>
+			<div class="list-title col-2"><p>특이사항</p></div>
 			<div class="list-title col-1"><p>사용여부</p></div>
 		</div>
 
@@ -24,10 +24,10 @@
 
 			<div class="row">
 				<div class="list-contents col-1"><p>{{ myList.id }}</p></div>
-				<div class="list-contents col-2"><p>{{ myList.company_id }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.company_id }}</p></div>
 				<div class="list-contents col-2"><p>{{ myList.company_name }}</p></div>
 				<div class="list-contents col-2"><p>{{ myList.rmk }}</p></div>
-				<div class="list-contents col-2"><p>{{ myList.use_yn }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.use_yn }}</p></div>
 			</div>
 
 		{% endfor %}

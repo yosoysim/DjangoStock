@@ -10,7 +10,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')), #allauth library 사용.
 
     # local apps
-    # path('', include('pages.urls')),
     path('', include('stock.urls')),
     #path('orders/', include('orders.urls')), 그냥 stock 아래에 위치시킴.
 

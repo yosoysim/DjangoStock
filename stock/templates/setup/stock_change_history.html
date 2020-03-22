@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+
+{% block title %} 주요 기준 변경 이력 {% endblock %}
+
+{% block script %}   {% endblock %}
+
+{% block content %}
+
+<div class="row block-center">
+
+	<div class="col-11">
+
+		<div class="row">
+
+			<div class="list-title col-1">순</div>
+			<div class="list-title col-2">등록일</div>
+			<div class="list-title col-3">제목</div>
+			<div class="list-title col-4">변경 내용</div>
+			<div class="list-title col-2">갱신일</div>
+		</div>
+
+		{% for myList in change_history %}
+
+			<div class="row">
+
+				<div class="list-contents col-1">{{ forloop.counter }}</div>
+				<div class="list-contents col-2">{{ myList.txn_date|date:'Y-m-d' }}</div>
+				<div class="list-contents col-3">{{ myList.title }}</div>
+				<div class="list-contents col-4">{{ myList.rmk }}</div>
+				<div class="list-contents col-2">{{ myList.upd_d|date:'Y-m-d m:s' }}</div>
+			</div>
+
+		{% endfor %}
+	</div>
+
+</div>
+
+{% endblock %}
+
+<div class="height-100"></div>

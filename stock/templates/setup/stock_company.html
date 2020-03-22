@@ -1,0 +1,81 @@
+{% extends '_base.html' %}
+
+{% block title %} 전체 종목 현황 {% endblock %}
+
+{% block script %}   {% endblock %}
+
+{% block content %}
+
+
+    <div class="btn-group">
+        <a href="{% url 'addCompany' %}" class="btn btn-info"> 종목 추가</a>
+    </div>
+    <p></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">종목코드</th>
+                <th scope="col">종목명</th>
+                <th scope="col">시장</th>
+                <th scope="col">배당여부</th>
+                <th scope="col">국내</th>
+                <th scope="col">사용여부</th>
+                <th scope="col">수정</th>
+                <th scope="col">삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c1 in stock_company %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'detailCompany' c1.id %}">{{c1.company_id}}</a></td>
+                    <td>{{c1.company_name}}</td>
+                    <td><a href="#" target="_blank">{{c1.pod}}</a></td>
+                    <td><a href="#" target="_blank">{{c1.baedang}}</a></td>
+                    <td><a href="#" target="_blank">{{c1.dom_yn}}</a></td>
+                    <td><a href="#" target="_blank">{{c1.is_active}}</a></td>
+                    <td><a href="{% url 'updateCompany' c1.id %}" class="btn btn-success btn-sm">수정</a></td>
+                    <td><a href="{% url 'deleteCompany' pk=c1.id %}" class="btn btn-danger btn-sm">삭제</a></td> {# 버튼 class는 bootstrap 용이다 #}
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% block pagination %}
+
+      {% if is_paginated %}
+
+        <ul class="pagination justify-content-center pagination-sm">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'stockCompany' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">이전</a>
+              </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">처음</a>
+            </li>
+            {% endif %}
+
+            {% for object in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == forloop.counter %}disabled{% endif %}">
+                    <a class="page-link" href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'stockCompany' %}?page={{ page_obj.next_page_number }}">다음</a>
+              </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">마지막</a>
+            </li>
+            {% endif %}
+        </ul>
+      {% endif %}
+    {% endblock %}
+
+{% endblock %}

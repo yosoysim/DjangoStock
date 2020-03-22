@@ -1,0 +1,107 @@
+{% extends "_base.html" %}
+
+{% block title %} 거래 {% endblock %}
+
+{% block script %}
+{% load static %} <script src = "{% static 'js/txn.js' %}"></script>
+{% endblock script %}
+
+{% block content %}
+<img class="gitbal" size=1 src="{% static 'images/logo_gitbal_h.png' %}">
+
+<div class="row block-center">
+	<div class="card-box col-6">
+		<form id="form_txn" action="{% url 'stocktxninput' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="company_id_hidden" id="company_id_hidden" value="" />
+			<input type="hidden" name="txn_seq" id="txn_seq" value="" />
+			<div class="row">
+				<div class="col-12"><h2>거래 입력</h2></div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-10">
+					종목코드:
+					<span class="margin-left-10">
+						<input type="text" name="company_id" id="company_id" value="005930" size="8" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-10"> 거래형태
+					<span class="margin-left-10">
+						<input type="radio" id="bos" NAME="bos" value= "B" {% if request.session.bos|default:"B" == "B" %} checked {% endif %} > 매수
+						<input type="radio" id="bos" NAME="bos" value= "S" {% if request.session.bos|default:"B" == "S" %} checked {% endif %} > 매도
+					</span>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11"> 거래일:
+					<span class="margin-left-10">
+						<input type="text" name="txn_date" id="txn_date" value="2020-03-13" size="8" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">거래량:
+					<span class="margin-left-10">
+						<input type="text" name="txn_qty" id="txn_qty" value="4" size="8" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">거래가:
+					<span class="margin-left-10">
+						<input type="text" name="txn_price" id="txn_price" value="2300" size="8" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">거래비:
+					<span class="margin-left-10">
+						<input type="text" name="txn_fee" id="txn_fee" value="1" size="8" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">
+					거래사유:
+					<span class="margin-left-10">
+						<select id="bos_reason" name="bos_reason">
+							<option value="" selected="selected"></option>
+							<option value="기술지표" selected>기술지표</option>
+							<option value="뉴스">뉴스</option>
+							<option value="직감">직감</option>
+						</select>
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">
+					거래사유(상세):
+					<span class="margin-left-10">
+						<input type="text" id="bos_reason_detail"  NAME="bos_reason_detail" value="" size="10" />
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ml-1 col-11">
+					거래여부:
+					<span class="margin-left-10">
+						<input type="radio" id="txn_yn" NAME="txn_yn" value= "Y" {% if request.session.txn_yn|default:"N" == "Y" %} checked {% endif %} > Yes
+						<input type="radio" id="txm_yn" NAME="txn_yn" value= "N" {% if request.session.txn_yn|default:"N" == "N" %} checked {% endif %} > No
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 center">
+					<input type="button" value="신규주문" onClick="txnInput()"/>
+					<input type="button" value="수정주문" onClick="txnEdit()"/>
+					<input type="button" value="취소주문" onClick="txnCancel()"/>
+					<input type="button" value="초기화" onClick="txnInit()"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

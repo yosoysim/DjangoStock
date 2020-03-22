@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cc173a7-9a78-4533-a458-9b0beb5ad86b" name="Default Changelist" comment="" />
+    <list default="true" id="1cc173a7-9a78-4533-a458-9b0beb5ad86b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/price/stock_indicator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/setup/stock_change_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/setup/stock_company_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/setup/stock_company_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/setup/stock_company_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/setup/stock_company_update.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/templates/txn/stock_txn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/stock/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/static/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/stock/templates/_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/stock/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/stock/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/stock/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/stock_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,12 +36,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Ymi8PMbcQLmhjELKgtNPAhouNo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -25,9 +56,17 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/stock/templates/setup" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sim\PycharmProjects\erp\stock\templates\setup" />
+      <recent name="C:\Users\sim\PycharmProjects\erp\stock\templates\price" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -47,6 +86,20 @@
       <workItem from="1583802036692" duration="5349000" />
       <workItem from="1583832051635" duration="3383000" />
       <workItem from="1583902702758" duration="8719000" />
+      <workItem from="1583967694747" duration="5116000" />
+      <workItem from="1584010120717" duration="890000" />
+      <workItem from="1584011026320" duration="8411000" />
+      <workItem from="1584059306600" duration="600000" />
+      <workItem from="1584076835066" duration="19099000" />
+      <workItem from="1584153277474" duration="28049000" />
+      <workItem from="1584194559549" duration="592000" />
+      <workItem from="1584230755438" duration="8140000" />
+      <workItem from="1584255059282" duration="12536000" />
+      <workItem from="1584274258802" duration="3287000" />
+      <workItem from="1584358959921" duration="8178000" />
+      <workItem from="1584619926966" duration="3137000" />
+      <workItem from="1584786368075" duration="4931000" />
+      <workItem from="1584832888632" duration="9633000" />
     </task>
     <servers />
   </component>

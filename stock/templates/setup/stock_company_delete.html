@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    종목 삭제
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="alert alert-danger"> "{{object.company_name}}"을 삭제할까요 ?</div>
+        <input type="submit" value="삭제" class="btn btn-info btn-sm">
+    </form>
+{% endblock %}

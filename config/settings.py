@@ -13,11 +13,11 @@ ENVIRONMENT = 'debug'
 SECRET_KEY = '#_0)(%$2pipfw-14aoqz&9kmu%ex8$_8u35gj99=je7t_asf*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False #True  # deploy 시는 False로 변경.
 
 # 나중에 호스팅 업체 선정하면 반드시 수정해야 한다.
 #ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -26,11 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions', #세션용
     'django.contrib.messages',
     'whitenoise.runserver_nostatic', #배포용 라이브러리
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',  # 숫자 천자리 콤마 표시용.
 
     # 사용자 개발앱
     #'pages.apps.PagesConfig',
@@ -48,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # 배포용.
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', #세션용.
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -71,7 +72,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', # 세션용
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -87,8 +88,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'erp', #db name
         'USER': 'root',

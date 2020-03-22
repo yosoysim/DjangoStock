@@ -1,0 +1,81 @@
+{% extends "_base.html" %}
+
+{% block title %} 일별 주가 {% endblock %}
+
+{% block script %}  {% endblock %}
+
+
+{% block content %}
+
+ <!--{{ companyList }}  폼을 이용한 dropdown list.. -->
+
+<div class="search-legend" >
+
+	<form action="" method="get">
+		<!--종목코드 <input type="text" name="q" value="{{ request.session.company_id }}">  -->
+		종목코드
+		<select name="q">
+			<option value=""></option>
+			{% for c1 in companyList %}
+				<option value="{{ c1.company_id }}"
+						{% if c1.company_id == request.session.company_id|default:''  %} selected {% endif %}} > {{ c1.company_id }}
+				</option>
+			{% endfor %}
+		</select>
+
+		기간 <input type="text" size=8 name="from_d" value="{{ request.session.from_d|default:'' }}"> ~
+			 <input type="text" size=8 name="to_d" value="{{ request.session.to_d|default:'' }}">
+	  <input type="submit" value="검색">
+	</form>
+
+</div>
+
+	<div class="col_full">
+
+		<div class="row">
+			<div class="list-title col-1"><p>종목코드</p></div>
+			<div class="list-title col-1"><p>거래일</p></div>
+			<div class="list-title col-1"><p>시가</p></div>
+			<div class="list-title col-1"><p>고가</p></div>
+			<div class="list-title col-1"><p>저가</p></div>
+			<div class="list-title col-1"><p>종가</p></div>
+			<div class="list-title col-1"><p>등락</p></div>
+			<div class="list-title col-1"><p>등락률</p></div>
+			<div class="list-title col-1"><p>거래량</p></div>
+			<div class="list-title col-1"><p>기관</p></div>
+			<div class="list-title col-1"><p>외국인</p></div>
+			<div class="list-title col-1"><p>PER</p></div>
+			<div class="list-title col-1"><p>EPS</p></div>
+			<div class="list-title col-1"><p>PBR</p></div>
+			<div class="list-title col-3"><p>갱신일시</p></div>
+		</div>
+
+		{% for myList in stockPrice %}
+
+			{% load humanize %}  <!-- 천 단위 콤마용 -->
+
+			<div class="row">
+				<div class="list-contents col-1"><p>{{ myList.company_id }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.txn_date|date:"Y-m-d" }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.price_open|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.price_high|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.price_low|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.price_close|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.risefall|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.risefall_rate|floatformat:1|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.volume|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.volume_org|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.volume_foreign|floatformat:0|intcomma }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.per }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.eps }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.pbr }}</p></div>
+				<div class="list-contents col-3"><p>{{ myList.upd_d|date:"Y-m-d m:s" }}</p></div>
+			</div>
+
+		{% endfor %}
+
+</div>
+
+{% endblock %}
+
+<div class="height-100"></div>
