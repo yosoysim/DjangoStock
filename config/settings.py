@@ -4,22 +4,19 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-#ENVIRONMENT = 'debug'
-ENVIRONMENT = 'production' # deploy 시..
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+ENVIRONMENT = 'debug'
+#ENVIRONMENT = 'production' # deploy 시..
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#_0)(%$2pipfw-14aoqz&9kmu%ex8$_8u35gj99=je7t_asf*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #True  # deploy 시는 False로 변경.
+DEBUG = True #True  # deploy 시는 False로 변경.
 
 # 나중에 호스팅 업체 선정하면 반드시 수정해야 한다..
 #ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*'] # production 용도
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -89,6 +86,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 # pythonAnywhere
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -99,10 +97,10 @@ DATABASES = {
         'PORT': "",
     }
 }
-
+"""
 
 # localhost
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -113,7 +111,7 @@ DATABASES = {
         'PORT': "",
     }
 }
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

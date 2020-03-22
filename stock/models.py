@@ -12,7 +12,7 @@ class StockList(models.Model):
     upd_d = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_list'
 
 
@@ -39,7 +39,7 @@ class StockPrice(models.Model):
     price_avg = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_price'
 
     def __str__(self):  # dunder method(double underscore)
@@ -321,7 +321,7 @@ class StockIndicator(models.Model):
     trend_lower_info = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_indicator'
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
@@ -358,7 +358,7 @@ class StockTxn(models.Model):
     upd_d = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_txn'
 
 class StockChangeHis(models.Model):
@@ -368,7 +368,7 @@ class StockChangeHis(models.Model):
     upd_d = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_change_his'
 
 
@@ -385,7 +385,7 @@ class StockCompany(models.Model):
     is_active = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stock_company'
 
     def get_absolute_url(self):
