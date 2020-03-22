@@ -13,11 +13,11 @@ ENVIRONMENT = 'debug'
 SECRET_KEY = '#_0)(%$2pipfw-14aoqz&9kmu%ex8$_8u35gj99=je7t_asf*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #True  # deploy 시는 False로 변경.
+DEBUG = True #True  # deploy 시는 False로 변경.
 
 # 나중에 호스팅 업체 선정하면 반드시 수정해야 한다.
 #ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -86,6 +86,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# localhost
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -93,6 +95,18 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD' : '123456',
         'HOST': '127.0.0.1',
+        'PORT': "",
+    }
+}
+"""
+# pythonAnywhere
+ATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'yosoysim$erp', #db name
+        'USER': 'yosoysim',
+        'PASSWORD' : 'orange!1',
+        'HOST': 'yosoysim.mysql.pythonanywhere-services.com',
         'PORT': "",
     }
 }

@@ -377,8 +377,8 @@ class StockCompanyView(generic.ListView):
 	paginate_by = 6
 
 	# 아래는 굳이 추가 안 해도 됨.(정렬 때문에 추가함)
-	#def get_queryset(self):
-	#	return StockCompany.objects.order_by('company_name')
+	def get_queryset(self):
+		return StockCompany.objects.order_by('company_name')
 
 """ function으로 할 경우
 def StockCompanyView(request):
