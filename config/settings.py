@@ -100,7 +100,7 @@ DATABASES = {
 }
 """
 # pythonAnywhere
-ATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'yosoysim$erp', #db name
