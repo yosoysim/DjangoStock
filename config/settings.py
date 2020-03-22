@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions', #세션용
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic', #배포용 라이브러리
+    #'whitenoise.runserver_nostatic', #배포용 라이브러리
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',  # 숫자 천자리 콤마 표시용.
