@@ -3,8 +3,10 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#ENVIRONMENT = os.environ.get('ENVIRONMENT', default='debug')   #production
-ENVIRONMENT = 'debug'
+
+#ENVIRONMENT = 'debug'
+ENVIRONMENT = 'production' # deploy 시..
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -15,7 +17,7 @@ SECRET_KEY = '#_0)(%$2pipfw-14aoqz&9kmu%ex8$_8u35gj99=je7t_asf*7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False #True  # deploy 시는 False로 변경.
 
-# 나중에 호스팅 업체 선정하면 반드시 수정해야 한다.
+# 나중에 호스팅 업체 선정하면 반드시 수정해야 한다..
 #ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 ALLOWED_HOSTS = ['*']
 
