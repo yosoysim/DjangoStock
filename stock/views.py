@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin
 )
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import redirect
 #import datetime
@@ -20,6 +20,8 @@ from django.http import JsonResponse
 from .forms import *
 from .models import *
 from django.db.models import Avg
+#from django.db import connection # raw sql 사용 위함.
+
 #from django.http import HttpResponse
 
 
@@ -59,7 +61,7 @@ def StockPiceView(request):
 
 	company = request.GET.get('q', '')  # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기 <-- 안 되는 듯..
 
-	request.session['company_id'] = company ;
+	request.session['company_id'] = company
 
 	if company:
 		qs = qs.filter(company_id=company)
@@ -149,9 +151,9 @@ def StockIndicatorCalView(request):
 			redirection_page = '/price/stock_indicatorCal_completed/'
 
 		else:
-			redirection_page = '/stock/error/'
+			redirection_page = 'error'
 	except:
-		redirection_page = '/stock/error/'
+		redirection_page = 'error'
 
 	return redirect(redirection_page)
 
@@ -353,6 +355,168 @@ def StockTxnInputView(request):
 def TxnInputCompleted(request):
 	return render(request,  'txn/txn_input_completed.html')
 
+
+"""
+class TxnCashView(generic.ListView):
+	#model = StockTxn
+	#queryset = StockTxn.objects.all()
+	#queryset = StockTxn.objects.filter(txn_seq=61)
+	#queryset = StockTxn.objects.get(txn_seq=61) 단일 api는 모두 에러남.
+	#queryset = qs.latest('-txn_seq')
+	template_name = 'txn/txn_cash.html'
+	context_object_name = 'cash_asis'
+	
+	def get_queryset(self):
+		#return StockTxn.objects.last()
+
+		#queryset = StockTxn.objects.latest('-txn_seq')
+		#queryset = StockTxn.objects.filter(txn_seq=61)
+
+		return self.queryset
+		#return StockTxn.objects.latest('-txn_seq')
+		#return model.objects.order_by('-txn_date')
+"""
+
+
+def TxnCashView(request):
+
+	qs = StockTxn.objects.order_by("-txn_seq")[:1]
+	args = {"cash_asis": qs }
+
+	return render(request, 'txn/txn_cash.html', args)
+
+"""
+class TxnCashView(CreateView):
+	model = StockCompany
+	fields = ['company_id', 'company_name', 'pod', 'dom_yn', 'baedang', 'is_active']
+	success_url = reverse_lazy('stockCompany')  # 글쓰기를 완료했을 때 이동할 페이지
+	template_name = 'setup/stock_company_create.html'
+"""
+
+def TxnCashInputView(request):
+
+	now = timezone.now()
+
+	if request.method == "POST":
+		balance = request.POST['cash_balance']
+		cashIn = request.POST['cash_in']
+		cashOut = request.POST['cash_out']
+
+		if not cashIn:
+			cashIn = 0
+
+		#if cashOut is None:
+		if not cashOut:
+			cashOut = 0
+
+		cashNet = int(balance) + int(cashIn) - int(cashOut) # 장고는 string임.
+
+		txn_seq = int(request.POST['txn_seq'])
+
+	try:
+		if cashNet  > 0 :
+
+			q = StockTxn(cash_balance=cashNet, bos = 'C', txn_yn='Y', upd_d = now, txn_seq=txn_seq+1, company_id='' )
+			q.save()
+
+			redirection_page = '/txn/txn_cash'
+
+		else:
+			redirection_page = '/stock/error/'
+	except:
+		redirection_page = '/stock/error/'
+
+	return redirect(redirection_page)
+
+
+
+class TxnHistoryView(generic.ListView):
+	template_name = 'txn/txn_history.html'
+	context_object_name = 'txn_history'
+
+	def get_queryset(self):
+		return StockTxn.objects.order_by('-txn_date')
+
+"""
+class TxnMonthlyView(generic.ListView):
+
+	template_name = 'txn/txn_monthly.html'
+	context_object_name = 'txn_monthly'
+
+	def get_queryset(self):
+
+		return TxnMonthlySQL.objects.order_by('txn_date')
+"""
+
+"""
+class TxnMonthlyView(generic.ListView):
+	template_name = 'txn/txn_monthly.html'
+
+	def get(self, request):
+		query = 'select company_id, bos, txn_qty, txn_price, txn_fee, txn_date from stock_txn'
+		cursor = connection.cursor()
+		row = cursor.execute(query)
+		rows = row.fetchall()
+		data = list()
+		for i in rows:
+			d = dict()
+			d['company_id'] = i[0]
+			d['bos'] = i[1]
+			d['txn_qty'] = i[2]
+			d['txn_price'] = i[3]
+			d['txn_fee'] = i[4]
+			data.append(d)		
+		return render(request, self.template_name, {'txn_monthly': data})
+"""
+
+def TxnMonthlyView(request) :
+
+	template ="txn/txn_monthly.html"
+	rows = []
+	cursor = connection.cursor()
+	cursor.execute('''SELECT date_format(txn_date, '%Y%m') as ym		
+		, sum(if(bos = 'B', txn_price*txn_qty, 0)) as amt_buy
+		, sum(if(bos = 'S', txn_price*txn_qty, 0)) as amt_sell
+		, sum(txn_fee) as txn_fee
+		, max(company_id)
+		FROM stock_txn 
+		WHERE txn_yn = "Y" 
+		AND user_id = 3
+		GROUP BY date_format(txn_date, '%Y%m')''')
+
+	for row in cursor.fetchall():
+		d = dict()
+		d['ym'] = row[0]
+		d['amt_buy'] = row[1]  #' bos'하면 안 됨.
+		d['amt_sell'] = row[2]
+		d['txn_fee'] = row[3]
+		d['company_id'] = row[4]
+
+		rows.append(d)
+
+	args = ({"txn_monthly": rows})
+
+	return render(request, template, args)
+
+
+"""
+#from django.db import connection
+def TxnMonthlyView(self):
+
+    with connection.cursor() as cursor:
+		
+		#cursor.execute("SELECT * FROM stock_txn WHERE txn_yn = %s", [self.txn_yn])
+		#cursor.execute("SELECT * FROM stock_txn")
+        #row = cursor.fetchone()
+		result = cursor.fetchall()
+
+    return result
+
+
+	#template_name = 'txn/txn_monthly.html'
+	#context_object_name = 'txn_monthly'
+"""
+
 class StockChangeHistoryView(generic.ListView):
 	template_name = 'setup/stock_change_history.html'
 	context_object_name = 'change_history'
@@ -412,3 +576,35 @@ class StockCompanyDeleteView(DeleteView):
 	model = StockCompany
 	success_url = reverse_lazy('stockCompany')  # 글쓰기를 완료했을 때 이동할 페이지
 	template_name = 'setup/stock_company_delete.html'
+
+
+def item_in_category(request, category_slug=None):
+	current_category = None
+	categories = Category.objects.all()
+	items = StockScoreMaster.objects.filter(use_yn='Y')
+
+
+	if category_slug:
+	    current_category = get_object_or_404(Category, slug=category_slug)
+	    items = items.filter(category=current_category)
+
+	return render(request, 'setup/stock_item_master.html',
+			  {'current_category': current_category, 'categories': categories, 'items': items})
+
+
+"""
+def item_in_category(request):
+	current_category = None
+	categories = Category.objects.all()
+	#items = StockScoreMaster.objects.filter(use_yn='Y')
+	items = StockScoreMaster.objects.all()
+
+	args = {"categories": categories, "items": items}
+
+	return render(request, 'setup/stock_item_master.html', args)
+"""
+
+def item_detail(request, id, item_slug=None):
+    item = get_object_or_404(StockScoreMaster, id=id, slug=StockScoreMaster)
+    #add_to_cart = AddProductForm(initial={'quantity':1})
+    return render(request, 'setup/stock_item_master_detail.html', {'item': item})

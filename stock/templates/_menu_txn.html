@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block menubar %}
+
+<nav class="my-2 my-md-0 mr-md-3">
+
+  <a class="p-2 text-dark" href="{% url 'stocktxn' %}">거래</a>
+  <a class="p-2 text-dark" href="{% url 'txnCash' %}">현금입출</a>
+  <a class="p-2 text-dark" href="{% url 'txnHistory' %}">거래내역</a>
+  <a class="p-2 text-dark" href="{% url 'txnMonthly' %}">월간손익</a>
+
+</nav>
+
+{% endblock menubar %}

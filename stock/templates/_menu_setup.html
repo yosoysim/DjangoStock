@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block menubar %}
+
+<nav class="my-2 my-md-0 mr-md-3">
+
+
+      <a class="p-2 text-dark" href="{% url 'stockChangeHistory' %}">지표산식 변경이력</a>
+      <a class="p-2 text-dark" href="{% url 'stockCompany' %}">관심종목</a>
+      <a class="p-2 text-dark" href="{% url 'item_all' %}">기술지표 설정</a>
+      {#<a class="p-2 text-dark" href="{% url 'item_detail' %}">Item Master Detail</a>#}
+
+
+
+</nav>
+
+{% endblock menubar %}

@@ -1,0 +1,51 @@
+{% extends '_menu_txn.html' %}
+
+{% block title %} 월간 손익 {% endblock %}
+
+{% block script %}   {% endblock %}
+
+{% block content %}
+
+    <p></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">연월</th>
+                <th scope="col">기초평가액</th>
+                <th scope="col">입금액</th>
+                <th scope="col">출금액</th>
+                <th scope="col">매수액</th>
+                <th scope="col">매도액</th>
+                <th scope="col">거래비용</th>
+                <th scope="col">주식 평가액</th>
+                <th scope="col">기말 현금</th>
+                <th scope="col">기말 평가액</th>
+                <th scope="col">월간 손익</th>
+                <th scope="col">손익률(%)</th>
+                <th scope="col">코스피(%)</th>
+                <th scope="col">차이(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c1 in txn_monthly %}
+                <tr>
+                    <td>{{c1.ym}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.bos}}</td>
+                    <td>{{c1.amt_buy}}</td>
+                    <td>{{c1.amt_sell}}</td>
+                    <td>{{c1.txn_fee}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                     <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_id}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends '_menu_txn.html' %}
+
+{% block title %} 현금 입출금 {% endblock %}
+
+{% block script %}   {% endblock %}
+
+{% block content %}
+
+
+    <div class="btn-group">
+        {#<a href="{% url 'txnCashAdd' %}" class="btn btn-info">현금 입출금</a>#}
+    </div>
+
+    <p></p>
+
+
+    <form id="cash_form" action="{% url 'txnCashAdd' %}" method="POST">
+		{% csrf_token %}
+        {% for c1 in cash_asis %}
+
+        잔금 <input type="text" name="cash_balance" size=7 value="{{c1.cash_balance}}" readonly> <p></p>
+        <input type="hidden" name="txn_seq" size=7 value="{{c1.txn_seq}}"> <p></p><br>
+
+        {% endfor %}
+
+		입금 <input type="text" name="cash_in" size=7 value=""> <p></p><br>
+        출금 <input type="text" name="cash_out" size=7 value=""> <p></p><br>
+		<input type="submit" value="저장">
+
+	</form>
+
+{% endblock %}

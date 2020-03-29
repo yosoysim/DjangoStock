@@ -1,0 +1,28 @@
+{% extends '_menu_setup.html' %}
+{% block title %}item Detail{% endblock %}
+{% block content %}
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    {#<img src="{{item.image.url}}" width="100%">#}
+                </div>
+                <div class="col">
+                    <h1 class="display-6">{{item.item}}</h1>
+
+                    <p><span class="badge badge-secondary">Price</span> {{item.item_desc}}</p>
+                    <form action="{% url 'cart:item_add' item.id %}" method="post">
+                        {{add_to_cart}}
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-sm" value="Add to Cart">
+                    </form>
+                    <h5><span class="badge badge-secondary">Description</span>{{item.long_desc|linebreaks}}</h5>
+                </div>
+            </div>
+
+        </div>
+
+
+
+{% endblock %}

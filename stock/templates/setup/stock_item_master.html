@@ -1,0 +1,54 @@
+{% extends '_menu_setup.html' %}
+{% block title %}Item Master{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group">
+                <a href="/" class="list-group-item {% if not current_category %}active{% endif %}">All</a>
+                {% for c in categories %}
+                    <a href="{{c.get_absolute_url}}" class="list-group-item {% if current_category.slug == c.slug %}active{% endif %}">{{c.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+              {% if current_category %}{{current_category.name}}{% else %}All Items{% endif %}
+            </div>
+            <div class="row">
+
+
+
+            {% for item in items %}
+
+
+
+                <div class="col-4">
+                    <div class="card">
+
+                      {#<img class="card-img-top" src="{{item.image.url}}" alt="Product Image">#}
+                      <div class="card-body">
+                        <h5 class="card-title">{{item.item}}</h5>
+
+                        <p class="card-text">{{item.item_desc}} <span class="badge badge-secondary">{{item.slug}}</span></p>
+                        <a href="{{item.get_absolute_url}}" class="btn btn-primary"> 내역 보기 </a>
+
+
+                      </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

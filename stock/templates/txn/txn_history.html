@@ -1,6 +1,6 @@
-{% extends "_menu_setup.html" %}
+{% extends "_menu_txn.html" %}
 
-{% block title %} 주요 기준 변경 이력 {% endblock %}
+{% block title %} 거래 이력 {% endblock %}
 
 {% block script %}   {% endblock %}
 
@@ -14,19 +14,23 @@
 
 			<div class="list-title col-1">순</div>
 			<div class="list-title col-2">등록일</div>
-			<div class="list-title col-3">제목</div>
-			<div class="list-title col-4">변경 내용</div>
+			<div class="list-title col-1_5">종목코드</div>
+			<div class="list-title col-1">BOS</div>
+			<div class="list-title col-1">거래량</div>
+			<div class="list-title col-1_5">거래단가</div>
 			<div class="list-title col-2">갱신일</div>
 		</div>
 
-		{% for myList in change_history %}
+		{% for myList in txn_history %}
 
 			<div class="row">
 
 				<div class="list-contents col-1">{{ forloop.counter }}</div>
 				<div class="list-contents col-2">{{ myList.txn_date|date:'Y-m-d' }}</div>
-				<div class="list-contents col-3">{{ myList.title }}</div>
-				<div class="list-contents col-4">{{ myList.rmk }}</div>
+				<div class="list-contents col-1_5">{{ myList.company_id }}</div>
+				<div class="list-contents col-1">{{ myList.bos }}</div>
+				<div class="list-contents col-1">{{ myList.txn_qty }}</div>
+				<div class="list-contents col-1_5">{{ myList.txn_price }}</div>
 				<div class="list-contents col-2">{{ myList.upd_d|date:'Y-m-d m:s' }}</div>
 			</div>
 

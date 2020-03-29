@@ -19,3 +19,17 @@ class BookAdmin(admin.ModelAdmin):
 
 admin.site.register(Book, BookAdmin)
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name','slug']
+    prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Category, CategoryAdmin)
+
+class StockScoreMasterAdmin(admin.ModelAdmin):
+    list_display = ['item','slug','category','item_desc','long_desc']
+    list_filter = ['category']
+    prepopulated_fields = {'slug': ('item',)}
+    list_editable = ['item_desc','long_desc']
+
+admin.site.register(StockScoreMaster, StockScoreMasterAdmin)

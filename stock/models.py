@@ -2,6 +2,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.db import connection
 
 class StockList(models.Model):
     user_id = models.PositiveIntegerField()
@@ -15,8 +16,6 @@ class StockList(models.Model):
         managed = False
         db_table = 'stock_list'
 
-
-#   * Make sure each model has one field with primary_key=True
 
 class StockPrice(models.Model):
     company_id = models.CharField(max_length=30, blank=True, null=True)
@@ -323,14 +322,6 @@ class StockIndicator(models.Model):
     class Meta:
         managed = False
         db_table = 'stock_indicator'
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
-
 
 
 class StockTxn(models.Model):
@@ -390,3 +381,66 @@ class StockCompany(models.Model):
 
     def get_absolute_url(self):
         return reverse('stockCompany', args=[str(self.id)]) # 뷰에서 success_url = reverse_lazy('stockCompany') 하는 것과 동일
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    meta_description = models.TextField(blank=True)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True, allow_unicode=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return "카테고리: " + self.name
+
+
+    def get_absolute_url(self):
+        #return reverse('stock:item_in_category', args=[self.slug])   # stock: 는 namespace를 의미함.
+        #return reverse('item_in_category', args=[self.slug])
+        return reverse('item_in_category', args=[str(self.id)])
+
+class StockScoreMaster(models.Model):
+    #category = models.CharField(max_length=30, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='items')
+    item = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True, allow_unicode=True)
+    image = models.ImageField(upload_to='items/%Y/%m/%d', blank=True)
+    item_desc = models.CharField(max_length=250)
+    long_desc = models.CharField(max_length=250, blank=True, null=True)
+    meta_description = models.TextField(blank=True)
+
+    def_field = models.TextField(db_column='def', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    plus = models.CharField(max_length=250, blank=True, null=True)
+    minus = models.CharField(max_length=250, blank=True, null=True)
+    criteria1 = models.FloatField(blank=True, null=True)
+    criteria1_desc = models.CharField(max_length=200, blank=True, null=True)
+    criteria2 = models.FloatField(blank=True, null=True)
+    criteria2_desc = models.CharField(max_length=200, blank=True, null=True)
+    use_yn = models.CharField(max_length=1)
+    image_name = models.CharField(max_length=100, blank=True, null=True)
+    time_delay = models.IntegerField(blank=True, null=True)
+    seq_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'stock_score_master'
+        index_together = [['id', 'item']]
+
+    def __str__(self):
+        return self.item
+
+    def get_absolute_url(self):
+        return reverse('item_detail', args=[self.id, self.slug])
+"""
+def TxnMonthlySQL(self):
+
+    cursor = connection.cursor()
+    cursor.execute('''SELECT * FROM stock_txn WHERE txn_yn ="Y"''')
+    #row = cursor.fetchone()
+    result = cursor.fetchall()
+
+    return result
+"""
