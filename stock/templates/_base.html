@@ -37,28 +37,135 @@
       <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">홈</a>
 
 
-      <div style="font-size:1em; color: red;"> {# color는 overide 되는 듯. 어디선가에서. #}
-
-        <nav class="my-2 my-md-0 mr-md-3">
-
-            <a href="{% url 'indicator' %}">Tech Indicator</a>
-            <a href="{% url 'stocktxn' %}">Transaction</a>
-            <a href="{% url 'book_list' %}">Chart</a>
-            <a href="{% url 'book_list' %}">Market</a>
-            <a href="{% url 'book_list' %}">Backtest</a>
-            <a href="{% url 'stockChangeHistory' %}">Setup</a>
-
-        </nav>
-
-      </div>
-
       {% block menubar %}
+
+      <ul class="nav nav-tabs">
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Tech Indicator
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+                <p><a href="{% url 'indicatorView' %}">Tech Indicator</a></p>
+                <p><a href="{% url 'stockPrice' %}">Price</a></p>
+                <p><a href="{% url 'stockList' %}">Company List</a></p>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Transaction
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+              <p><a href="{% url 'stocktxn' %}">거래</a></p>
+              <p><a href="{% url 'txnCash' %}">현금입출</a></p>
+              <p><a href="{% url 'txnHistory' %}">거래내역</a></p>
+              <p><a href="{% url 'txnPeriod' %}">기간손익</a></p>
+              <p><a href="{% url 'txnMonthly' %}">월간손익</a></p>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Chart
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Market
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Backtest
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+
+              <a href="{% url 'backtestAll' %}">Backtest(All)</a>
+              <a href="{% url 'backtestAll' %}">Backtest(Good)</a>
+              <a href="{% url 'backtestAll' %}">Simulation</a>
+
+
+            </ul>
+          </li>
+
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Setup
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+
+              <p><a href="{% url 'stockChangeHistory' %}">지표산식 변경이력</a></p>
+              <p><a href="{% url 'stockCompany' %}">관심종목</a></p>
+              <p><a href="{% url 'scoreMaster' %}">점수설정</a></p>
+              <p><a href="{% url 'item_all' %}">기술지표 설정</a></p>
+              {#<a href="{% url 'item_detail' %}">Item Master Detail</a>#}
+            </ul>
+          </li>
+
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Q&A
+                <b class="caret"></b>
+              </a>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Manager
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+
+                <p><a href="{% url 'about' %}">Company(All)</a></p>
+                <p><a href="{% url 'about' %}">Notice)</a></p>
+                <p><a href="{% url 'about' %}">DML</a></p>
+                <p><a href="{% url 'about' %}">RBAC</a></p>
+                <p><a href="{% url 'about' %}">DML</a></p>
+
+            </ul>
+          </li>
+
+      </ul>
+
+
 
       {% endblock menubar %}
 
        <nav class="my-2 my-md-0 mr-md-3">
 
-            <a href="{% url 'book_list' %}">Manager</a>
+
             <a  href="{% url 'book_list' %}">Books</a>
             <a href="{% url 'about' %}">소개</a>
             {% if user.is_authenticated %}

@@ -8,7 +8,11 @@
     return;
 
   $('#indicator_form').submit(); */
-  $(location).attr('href', '/price/indicator_cal');
+  //#$(location).attr('href', '/price/indicator_cal');
+
+  $("#indicator_form").attr("action", "/price/indicator_cal"); /* elegabt url 사용하면 안 됨 */
+  $("#indicator_form").submit();
+
 
 
 }

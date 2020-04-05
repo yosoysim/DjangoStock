@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 {#{% extends '_menu_setup.html' %}#}
 
-{% block title %} 전체 종목 현황 {% endblock %}
+{% block title %} Score Master {% endblock %}
 
 {% block script %}   {% endblock %}
 
@@ -9,35 +9,38 @@
 
 
     <div class="btn-group">
-        <a href="{% url 'addCompany' %}" class="btn btn-info"> 종목 추가</a>
+        <a href="{% url 'addScoreMaster' %}" class="btn btn-info"> 기술항목 추가</a>
     </div>
     <p></p>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">종목코드</th>
-                <th scope="col">종목명</th>
-                <th scope="col">시장</th>
-                <th scope="col">배당여부</th>
-                <th scope="col">국내</th>
-                <th scope="col">사용여부</th>
+
+                <th scope="col">카테고리</th>
+                <th scope="col">번호</th>
+                <th scope="col">기술지표</th>
+                <th scope="col">명칭</th>
+                <th scope="col">가점기준</th>
+                <th scope="col">감점기준</th>
+                <th scope="col">기준치1</th>
+                <th scope="col">기준치2</th>
                 <th scope="col">수정</th>
                 <th scope="col">삭제</th>
             </tr>
         </thead>
         <tbody>
-            {% for c1 in stock_company %}
+            {% for c1 in scoreMaster %}
                 <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td><a href="{% url 'detailCompany' c1.id %}">{{c1.company_id}}</a></td>
-                    <td>{{c1.company_name}}</td>
-                    <td><a href="#" target="_blank">{{c1.pod}}</a></td>
-                    <td><a href="#" target="_blank">{{c1.baedang}}</a></td>
-                    <td><a href="#" target="_blank">{{c1.dom_yn}}</a></td>
-                    <td><a href="#" target="_blank">{{c1.is_active}}</a></td>
-                    <td><a href="{% url 'updateCompany' c1.id %}" class="btn btn-success btn-sm">수정</a></td>
-                    <td><a href="{% url 'deleteCompany' pk=c1.id %}" class="btn btn-danger btn-sm">삭제</a></td> {# 버튼 class는 bootstrap 용이다 #}
+                    <td>{{c1.category}}</td>
+                    <td>{{c1.seq_id}}</td>
+                    <td><a href="{% url 'detailScoreMaster' c1.id %}">{{c1.item}}</a></td>
+                    <td>{{c1.item_desc}}</td>
+                    <td>{{c1.plus}}</td>
+                    <td>{{c1.minus}}</td>
+                    <td>{{c1.criteria1}}</td>
+                    <td>{{c1.criteria2}}</td>
+                    <td><a href="{% url 'updateScoreMaster' c1.id %}" class="btn btn-success btn-sm">수정</a></td>
+                    <td><a href="{% url 'deleteScoreMaster' pk=c1.id %}" class="btn btn-danger btn-sm">삭제</a></td> {# 버튼 class는 bootstrap 용이다 #}
 
                 </tr>
             {% endfor %}

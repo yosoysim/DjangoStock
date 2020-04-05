@@ -9,13 +9,13 @@ urlpatterns = [
     #path('', main_page, name='main'),
     path('', HomePageView.as_view(), name='home'),
     #path('price/', MenuPriceView, name='menu_price'),
-    path('price/indicator', StockIndicatorView, name='indicator'),
+    path('price/indicator/', StockIndicatorView, name='indicatorView'),
     path('price/indicator_cal', StockIndicatorCalView, name='indicatorCal'),
     path('price/indicator_edit', StockIndicatorEditView, name='indicatorEdit'),
     path('price/indicator_all_recal', StockIndicatorAllCalView, name='indicatorAllReCal'),
     path('price/stock_indicatorCal_completed/', IndicatorCalCompletedView, name='indicalorCalcompleted'),
-    path('price/stock_list', stock_list_view, name='stocklist'),
-    path('price/stock_price', StockPiceView, name='stockprice'),
+    path('price/stock_list', stockListview, name='stockList'),
+    path('price/stock_price', StockPiceView, name='stockPrice'),
     #path('price/stock_price/search', stock_price_view_search.as_view(), name='stockprice_search'),
 
     path('txn/stock_txn', StockTxnView, name='stocktxn'),
@@ -24,9 +24,13 @@ urlpatterns = [
     #path('txn/txn_cash', views.TxnCashView.as_view(), name='txnCash'),
     path('txn/txn_cash', TxnCashView, name='txnCash'),
     path('txn/txn_cash/add/', TxnCashInputView, name='txnCashAdd'),
-    path('txn/txn_history', views.TxnHistoryView.as_view(), name='txnHistory'),
+    #path('txn/txn_history', views.TxnHistoryView.as_view(), name='txnHistory'),
+    path('txn/txn_history', TxnHistoryView, name='txnHistory'),
     #path('txn/txn_monthly', views.TxnMonthlyView.as_view(), name='txnMonthly'),
+    path('txn/txn_period', TxnPeriodView, name='txnPeriod'),
     path('txn/txn_monthly', TxnMonthlyView, name='txnMonthly'),
+
+    path('backtest/backtest_all/', BacktestAllView, name='backtestAll'),
 
     path('setup/stock_change_history', views.StockChangeHistoryView.as_view(), name='stockChangeHistory'),
 
@@ -37,12 +41,19 @@ urlpatterns = [
     path('setup/stock_company/delete/<int:pk>/', StockCompanyDeleteView.as_view(), name='deleteCompany'),
     path('setup/stock_company/detail/<int:pk>/', StockCompanyDetailView.as_view(), name='detailCompany'),
 
+    path('setup/score_master/', views.ScoreMasterView.as_view(), name='scoreMaster'),  # clsss로 할 경우
+    path('setup/score_master/add/', ScoreMasterCreateView.as_view(), name='addScoreMaster'),
+    path('setup/score_master/update/<int:pk>/', ScoreMasterUpdateView.as_view(), name='updateScoreMaster'),
+    path('setup/score_master/delete/<int:pk>/', ScoreMasterDeleteView.as_view(), name='deleteScoreMaster'),
+    path('setup/score_master/detail/<int:pk>/', ScoreMasterDetailView.as_view(), name='detailScoreMaster'),
+
     path('setup/stock_item_master', item_in_category, name='item_all'),
     path('setup/stock_item_master/<slug:category_slug>/', item_in_category, name='item_in_category'),
     #path('setup/stock_item_master/<int:id>/', item_in_category, name='item_in_category'),
     path('setup/stock_item_master_detail/<int:id>/<item_slug>/', item_detail, name='item_detail'),
     #path('setup/stock_item_master_detail/<int:id>/', item_detail, name='item_detail'),
 
+    #path('board/', aaa, name='boards'),
     #path('setup/stock_company/', StockCompanyView, name='stockCompany'),  function으로 할 경우
 
     path('signup/', SignupPageView.as_view(), name='signup'),

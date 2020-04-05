@@ -1,10 +1,25 @@
-{% extends "_menu_txn.html" %}
+{% extends "_base.html" %}
+{#{% extends "_menu_txn.html" %}#}
 
 {% block title %} 거래 이력 {% endblock %}
 
 {% block script %}   {% endblock %}
 
 {% block content %}
+
+
+    <form id="form_txn" action="{% url 'txnHistory' %}" method="post">
+		{% csrf_token %}
+
+		종목코드:
+		<input type="text" name="company_id" value="{{request.session.company_id|default:''}}" size="6" />
+
+        조회기간:
+        <input type="text" name="date_from" value="{{request.session.date_from|default:'2018-01-01'}}" size="8" />-
+        <input type="text" name="date_to" value="{{request.session.date_to|default:'2099-12-31'}}" size="8" />
+        <input type="submit" value="조회"/>
+    </form>
+
 
 <div class="row block-center">
 

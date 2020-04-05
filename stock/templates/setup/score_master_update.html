@@ -2,14 +2,13 @@
 {#{% extends '_menu_setup.html' %}#}
 
 {% block title %}
-    종목 삭제
+    기술지표 수정
 {% endblock %}
 
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
-
-        <div class="alert alert-danger"> "{{object.company_name}}"을 삭제할까요 ?</div>
-        <input type="submit" value="삭제" class="btn btn-info btn-sm">
+        {{form.as_p}}
+        <input type="submit" value="갱신" class="btn btn-info btn-sm">
     </form>
 {% endblock %}

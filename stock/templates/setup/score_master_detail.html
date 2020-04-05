@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{#{% extends '_menu_setup.html' %}#}
+{% load crispy_forms_tags %}
+
+{% block title %}기술지표 점수 설정{% endblock %}
+
+
+{% block content %}
+<h2>{{object.item}}</h2> <br><br>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+
+    카테고리 {{object.category}} <br><br>
+    순번 {{object.item_seq}} <br><br>
+    기술지표명{{object.item_desc}} <br><br>
+    설명{{object.long_desc}} <br><br>
+    공식{{object.def_field}} <br><br>
+
+    가점{{object.puls}} <br><br>
+    감점{{object.minus}} <br><br>
+    기준치1{{object.criteria1}} <br><br>
+
+
+  <a href="{% url 'scoreMaster' %}">목록</a>
+</form>
+{% endblock content %}

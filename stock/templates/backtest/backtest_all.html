@@ -1,0 +1,102 @@
+{% extends "_base.html" %}
+{#{% extends '_menu_backtest.html' %}#}
+
+{% block title %} backtest {% endblock %}
+
+{% block script %}   {% endblock %}
+
+{% block content %}
+
+
+    <div class="btn-group">
+
+    </div>
+    <p></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" rowspan="3">종목코드</th>
+                <th scope="col" rowspan="3">종목명</th>
+                <th scope="col" colspan="6">hammer1</th>
+                <th scope="col" colspan="6">hammer2</th>
+            </tr>
+            <tr>
+                <th scope="col" colspan="3">up</th>
+                <th scope="col" colspan="3">down</th>
+                <th scope="col" colspan="3">up</th>
+                <th scope="col" colspan="3">down</th>
+             <tr>
+                <th scope="col">포착</th>
+                <th scope="col">빈도</th>
+                <th scope="col">등락</th>
+                <th scope="col">포착</th>
+                <th scope="col">빈도</th>
+                <th scope="col">등락</th>
+                <th scope="col">포착</th>
+                <th scope="col">빈도</th>
+                <th scope="col">등락</th>
+                <th scope="col">포착</th>
+                <th scope="col">빈도</th>
+                <th scope="col">등락</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c1 in backtest %}
+                <tr>
+                    <td>{{c1.company_id}}</td>
+                    <td>{{c1.company_name}}</td>
+                    <td>{{c1.cnt_hammer1_up}}</td>
+                    <td>{{c1.hammer1_up}}</td>
+                    <td>{{c1.hammer1_up_rf}}</td>
+                    <td>{{c1.cnt_hammer1_dn}}</td>
+                    <td>{{c1.hammer1_dn}}</td>
+                    <td>{{c1.hammer1_dn_rf}}</td>
+
+                    <td>{{c1.cnt_hammer2_up}}</td>
+                    <td>{{c1.hammer2_up}}</td>
+                    <td>{{c1.hammer2_up_rf}}</td>
+                    <td>{{c1.cnt_hammer2_dn}}</td>
+                    <td>{{c1.hammer2_dn}}</td>
+                    <td>{{c1.hammer2_dn_rf}}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% block pagination %}
+
+      {% if is_paginated %}
+
+        <ul class="pagination justify-content-center pagination-sm">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'backtestAll' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">이전</a>
+              </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">처음</a>
+            </li>
+            {% endif %}
+
+            {% for object in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == forloop.counter %}disabled{% endif %}">
+                    <a class="page-link" href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'backtestAll' %}?page={{ page_obj.next_page_number }}">다음</a>
+              </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">마지막</a>
+            </li>
+            {% endif %}
+        </ul>
+      {% endif %}
+    {% endblock %}
+
+{% endblock %}

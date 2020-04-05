@@ -16,6 +16,9 @@ class StockList(models.Model):
         managed = False
         db_table = 'stock_list'
 
+    #def get_absolute_url(self):
+     #   return reverse('stockList') #args=[str(self.id)]
+
 
 class StockPrice(models.Model):
     company_id = models.CharField(max_length=30, blank=True, null=True)
@@ -394,7 +397,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
     def __str__(self):
-        return "카테고리: " + self.name
+        return self.name
 
 
     def get_absolute_url(self):
@@ -434,6 +437,7 @@ class StockScoreMaster(models.Model):
 
     def get_absolute_url(self):
         return reverse('item_detail', args=[self.id, self.slug])
+
 """
 def TxnMonthlySQL(self):
 
@@ -444,3 +448,182 @@ def TxnMonthlySQL(self):
 
     return result
 """
+
+
+class StockTxnTemp(models.Model):
+    user_id = models.IntegerField(blank=True, null=True)
+    company_id = models.CharField(max_length=6, blank=True, null=True)
+    qty = models.IntegerField(blank=True, null=True)
+    profit = models.FloatField(blank=True, null=True)
+    upd_d = models.DateField(blank=True, null=True)
+    txn_fee = models.IntegerField(blank=True, null=True)
+    target_yn = models.CharField(max_length=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_txn_temp'
+
+
+
+
+class StockScoreLog(models.Model):
+    user_id = models.IntegerField(blank=True, null=True)
+    company_id = models.CharField(max_length=6, blank=True, null=True)
+    txn_date = models.DateField(blank=True, null=True)
+    c_hammer1 = models.IntegerField(blank=True, null=True)
+    c_hammer2 = models.IntegerField(blank=True, null=True)
+    c_doji = models.IntegerField(blank=True, null=True)
+    c_engulf = models.IntegerField(blank=True, null=True)
+    c_three_method = models.IntegerField(blank=True, null=True)
+    c_two_medium = models.IntegerField(blank=True, null=True)
+    c_gap = models.IntegerField(blank=True, null=True)
+    c_pole = models.IntegerField(blank=True, null=True)
+    ma5 = models.IntegerField(blank=True, null=True)
+    ma5_20 = models.IntegerField(blank=True, null=True)
+    ma5_60 = models.IntegerField(blank=True, null=True)
+    ma_gd = models.IntegerField(blank=True, null=True)
+    ma_gd_slope = models.IntegerField(blank=True, null=True)
+    formula = models.IntegerField(blank=True, null=True)
+    macd = models.IntegerField(blank=True, null=True)
+    macd_gd = models.IntegerField(blank=True, null=True)
+    sto = models.IntegerField(blank=True, null=True)
+    sto_gd = models.IntegerField(blank=True, null=True)
+    sto_up_down = models.IntegerField(blank=True, null=True)
+    ilmok_cloud = models.IntegerField(blank=True, null=True)
+    ilmok_layer = models.IntegerField(blank=True, null=True)
+    ilmok_gd = models.IntegerField(blank=True, null=True)
+    bb_band = models.IntegerField(blank=True, null=True)
+    bb_direction = models.IntegerField(blank=True, null=True)
+    bb_gd = models.IntegerField(blank=True, null=True)
+    envelope = models.IntegerField(blank=True, null=True)
+    investor_sent = models.IntegerField(blank=True, null=True)
+    rsi = models.IntegerField(blank=True, null=True)
+    disparity = models.IntegerField(blank=True, null=True)
+    obv = models.IntegerField(blank=True, null=True)
+    obv_gd = models.IntegerField(blank=True, null=True)
+    momentum_gd = models.IntegerField(blank=True, null=True)
+    momentum = models.IntegerField(blank=True, null=True)
+    per = models.IntegerField(blank=True, null=True)
+    eps = models.IntegerField(blank=True, null=True)
+    pbr = models.IntegerField(blank=True, null=True)
+    yield_gap = models.IntegerField(blank=True, null=True)
+    obv_org = models.IntegerField(blank=True, null=True)
+    ev_ebitda = models.IntegerField(blank=True, null=True)
+    co = models.IntegerField(blank=True, null=True)
+    macd_oscill = models.IntegerField(blank=True, null=True)
+    pvi_nvi = models.IntegerField(blank=True, null=True)
+    sonar_gd = models.IntegerField(blank=True, null=True)
+    dx = models.IntegerField(blank=True, null=True)
+    dx_gd = models.IntegerField(blank=True, null=True)
+    adx = models.IntegerField(blank=True, null=True)
+    hybrid1 = models.IntegerField(blank=True, null=True)
+    obv_frn = models.IntegerField(blank=True, null=True)
+    mix_gd = models.IntegerField(blank=True, null=True)
+    cci1 = models.IntegerField(blank=True, null=True)
+    cci2 = models.IntegerField(blank=True, null=True)
+    mfi = models.IntegerField(blank=True, null=True)
+    wo = models.IntegerField(blank=True, null=True)
+    investor_sent_new = models.IntegerField(blank=True, null=True)
+    elder_ray = models.IntegerField(blank=True, null=True)
+    sigma = models.IntegerField(blank=True, null=True)
+    keltner = models.IntegerField(blank=True, null=True)
+    dema = models.IntegerField(blank=True, null=True)
+    mass_index = models.IntegerField(blank=True, null=True)
+    price_oscill = models.IntegerField(blank=True, null=True)
+    pvt = models.IntegerField(blank=True, null=True)
+    aroon_gd = models.IntegerField(blank=True, null=True)
+    psar = models.IntegerField(blank=True, null=True)
+    rsi_gd = models.IntegerField(blank=True, null=True)
+    upd_d = models.DateTimeField(blank=True, null=True)
+    cmf = models.IntegerField(blank=True, null=True)
+    demark = models.IntegerField(blank=True, null=True)
+    mac = models.IntegerField(blank=True, null=True)
+    rsi_macd = models.IntegerField(blank=True, null=True)
+    sonar_sent = models.IntegerField(blank=True, null=True)
+    bb_detach = models.IntegerField(blank=True, null=True)
+    rvi = models.IntegerField(blank=True, null=True)
+    c_red3 = models.IntegerField(blank=True, null=True)
+    sto_bull_bear = models.IntegerField(blank=True, null=True)
+    c_reversal = models.IntegerField(blank=True, null=True)
+    c_thrust = models.IntegerField(blank=True, null=True)
+    spike_day = models.IntegerField(blank=True, null=True)
+    sim = models.IntegerField(blank=True, null=True)
+    c_island = models.IntegerField(blank=True, null=True)
+    c_star = models.IntegerField(blank=True, null=True)
+    c_hammer3 = models.IntegerField(blank=True, null=True)
+    c_harami = models.IntegerField(blank=True, null=True)
+    pyramid = models.IntegerField(blank=True, null=True)
+    cci3 = models.IntegerField(blank=True, null=True)
+    mix_divergence = models.IntegerField(blank=True, null=True)
+    c_belthold = models.IntegerField(blank=True, null=True)
+    c_spinning = models.IntegerField(blank=True, null=True)
+    c_pierce = models.IntegerField(blank=True, null=True)
+    ma_stratum = models.IntegerField(blank=True, null=True)
+    t3 = models.IntegerField(blank=True, null=True)
+    price_ch = models.IntegerField(blank=True, null=True)
+    tema = models.IntegerField(blank=True, null=True)
+    c_qstick = models.IntegerField(blank=True, null=True)
+    stoch_rsi = models.IntegerField(blank=True, null=True)
+    cmo = models.IntegerField(blank=True, null=True)
+    kvo = models.IntegerField(blank=True, null=True)
+    ultimate_oscill = models.IntegerField(blank=True, null=True)
+    will_percent_r = models.IntegerField(blank=True, null=True)
+    binary_wave = models.IntegerField(blank=True, null=True)
+    fcst_oscill = models.IntegerField(blank=True, null=True)
+    aroon = models.IntegerField(blank=True, null=True)
+    adl = models.IntegerField(blank=True, null=True)
+    pvo = models.IntegerField(blank=True, null=True)
+    vo = models.IntegerField(blank=True, null=True)
+    force_index = models.IntegerField(blank=True, null=True)
+    csi = models.IntegerField(blank=True, null=True)
+    projection = models.IntegerField(blank=True, null=True)
+    smi = models.IntegerField(blank=True, null=True)
+    inertia = models.IntegerField(blank=True, null=True)
+    vidya = models.IntegerField(blank=True, null=True)
+    projection_oscill = models.IntegerField(blank=True, null=True)
+    sent_disparity = models.IntegerField(blank=True, null=True)
+    trix = models.IntegerField(blank=True, null=True)
+    c_scare = models.IntegerField(blank=True, null=True)
+    volume_sent = models.IntegerField(blank=True, null=True)
+    volume_liquidate = models.IntegerField(blank=True, null=True)
+    trend_fcst = models.IntegerField(blank=True, null=True)
+    pattern_w = models.IntegerField(blank=True, null=True)
+    sonar = models.IntegerField(blank=True, null=True)
+    c_zigzag = models.IntegerField(blank=True, null=True)
+    spring = models.IntegerField(blank=True, null=True)
+    bb_center = models.IntegerField(blank=True, null=True)
+    volume_mass = models.IntegerField(blank=True, null=True)
+    mesa = models.IntegerField(blank=True, null=True)
+    vama = models.IntegerField(blank=True, null=True)
+    adxr = models.IntegerField(blank=True, null=True)
+    lrs = models.IntegerField(blank=True, null=True)
+    pfe = models.IntegerField(blank=True, null=True)
+    dpo = models.IntegerField(blank=True, null=True)
+    flag = models.IntegerField(blank=True, null=True)
+    ma60 = models.IntegerField(blank=True, null=True)
+    trend_breakaway = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_score_log'
+
+
+
+class StockYmd(models.Model):
+    txn_date = models.DateField()
+    index_kospi = models.FloatField(blank=True, null=True)
+    index_kosdaq = models.FloatField(blank=True, null=True)
+    date_seq = models.IntegerField()
+    index_dow = models.FloatField(blank=True, null=True)
+    index_nasdaq = models.FloatField(blank=True, null=True)
+    baedang = models.CharField(max_length=1, blank=True, null=True)
+    interest = models.FloatField(blank=True, null=True)
+    oil = models.FloatField(blank=True, null=True)
+    exchange = models.FloatField(blank=True, null=True)
+    index_sp500 = models.FloatField(blank=True, null=True)
+    rmk = models.CharField(max_length=200, blank=True, null=True)
+    usa_open_yn = models.CharField(max_length=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'stock_ymd'

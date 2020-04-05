@@ -1,5 +1,5 @@
-{#{% extends "_base.html" %}#}
-{% extends "_menu_price.html" %}
+{% extends "_base.html" %}
+{#{% extends "_menu_price.html" %}#}
 
 {% block title %} 기술 지표 {% endblock %}
 
@@ -9,26 +9,28 @@
 
 {% block content %}
 
-
 <div class="search-legend" >
 
-	<form id="indicator_form" action="" method="GET"> <!-- {% url 'indicatorEdit' %}  JS 통하면 무조건 GET으로 해야한다.  -->
+	<form id="indicator_form" action="" method="GET"> <!--   JS 통하면 무조건 GET으로 해야한다. {% url 'StockIndicatorView' %} -->
 		{% csrf_token %} <!-- CSRF 검증에 실패했습니다. 요청을 중단하였습니다.: JS를 통할 때  POST로 보내면 이 에러 발생한다. -->
 
 		종목코드
-		<select name="q">
+		<select name="company_id">
 			<option value=""></option>
-			{% for c1 in companyList %}
+			{% for c1 in company_lov %}
 				<option value="{{ c1.company_id }}"
 						{% if c1.company_id == request.session.company_id|default:''  %} selected {% endif %}} > {{ c1.company_id }}
 				</option>
 			{% endfor %}
 		</select>
 
+
 		기간 <input type="text" size=8 name="from_d" value="{{ request.session.from_d|default:'' }}"> ~
 			 <input type="text" size=8 name="to_d" value="{{ request.session.to_d|default:'' }}">
 	  	<input type="submit" value="검색">
 		<input type="button" value="지수 계산" onClick="calIndicator()">
+
+
 
 		id(key) <input type="text" name="key_id" size=1 value="16">
 		<input type="button" value="지수 수정" onClick="editIndicator()">
@@ -47,6 +49,7 @@
 
 		<div class="row">
 			<div class="list-title col-1"><p>종목코드</p></div>
+			<div class="list-title col-1"><p>id</p></div>
 			<div class="list-title col-1"><p>거래일</p></div>
 			<div class="list-title col-1"><p>ma5</p></div>
 			<div class="list-title col-1"><p>ma10</p></div>
@@ -67,6 +70,7 @@
 
 			<div class="row">
 				<div class="list-contents col-1"><p>{{ myList.company_id }}</p></div>
+				<div class="list-contents col-1"><p>{{ myList.id }}</p></div>
 				<div class="list-contents col-1"><p>{{ myList.txn_date|date:"Y-m-d"  }}</p></div>
 				<div class="list-contents col-1"><p>{{ myList.ma5 }}</p></div>
 				<div class="list-contents col-1"><p>{{ myList.ma10 }}</p></div>
